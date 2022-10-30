@@ -28,6 +28,16 @@ struct ContentView: View {
                     }
             }
             .tag(1)
+            
+            MonthlySymmaryTabView()
+                .tabItem {
+                    VStack {
+                        Text("Monthly Summary")
+//                        Image(systemName: "waveform.path.ecg")
+                        Image(systemName: "chart.bar")
+                    }
+            }
+            .tag(2)
         }
     }
 }

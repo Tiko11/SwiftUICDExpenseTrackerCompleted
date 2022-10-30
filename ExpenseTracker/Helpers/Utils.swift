@@ -23,4 +23,9 @@ struct Utils {
         return formatter
     }()
     
+    static let dateStringFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM"
+        return formatter
+    }()
 }

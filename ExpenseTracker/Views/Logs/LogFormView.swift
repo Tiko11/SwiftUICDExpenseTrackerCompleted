@@ -18,6 +18,7 @@ struct LogFormView: View {
     @State var amount: Double = 0
     @State var category: Category = .utilities
     @State var date: Date = Date()
+    @State var notes: String = ""
     
     @Environment(\.presentationMode)
     var presentationMode
@@ -43,6 +44,8 @@ struct LogFormView: View {
                 DatePicker(selection: $date, displayedComponents: .date) {
                     Text("Date")
                 }
+                TextField("Notes", text: $notes)
+                    .disableAutocorrection(true)
             }
 
             .navigationBarItems(
@@ -73,6 +76,8 @@ struct LogFormView: View {
         log.category = self.category.rawValue
         log.amount = NSDecimalNumber(value: self.amount)
         log.date = self.date
+        log.dateString = Utils.dateStringFormatter.string(from: self.date)
+        log.notes = self.notes
         
         do {
             try context.save()

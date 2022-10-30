@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-extension ExpenseLog: Identifiable {
+extension ExpenseLog {
     
     var categoryEnum: Category {
         Category(rawValue: category ?? "") ?? .other
@@ -25,6 +25,10 @@ extension ExpenseLog: Identifiable {
     
     var amountText: String {
         Utils.numberFormatter.string(from: NSNumber(value: amount?.doubleValue ?? 0)) ?? ""
+    }
+    
+    var notesText: String {
+        notes ?? ""
     }
     
     static func fetchAllCategoriesTotalAmountSum(context: NSManagedObjectContext, completion: @escaping ([(sum: Double, category: Category)]) -> ()) {
@@ -61,7 +65,6 @@ extension ExpenseLog: Identifiable {
                 completion([])
             }
         }
-        
     }
     
     static func predicate(with categories: [Category], searchText: String) -> NSPredicate? {
@@ -70,6 +73,25 @@ extension ExpenseLog: Identifiable {
         if !categories.isEmpty {
             let categoriesString = categories.map { $0.rawValue }
             predicates.append(NSPredicate(format: "category IN %@", categoriesString))
+        }
+        
+        if !searchText.isEmpty {
+            predicates.append(NSPredicate(format: "name CONTAINS[cd] %@", searchText.lowercased()))
+        }
+        
+        if predicates.isEmpty {
+            return nil
+        } else {
+            return NSCompoundPredicate(andPredicateWithSubpredicates: predicates)
+        }
+    }
+    
+    static func predicate(with months: [Month], searchText: String) -> NSPredicate? {
+        var predicates = [NSPredicate]()
+        
+        if !months.isEmpty {
+            let monthsString = months.map { $0.shortName }
+            predicates.append(NSPredicate(format: "dateString IN %@", monthsString))
         }
         
         if !searchText.isEmpty {
