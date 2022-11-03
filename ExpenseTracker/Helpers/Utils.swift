@@ -8,7 +8,14 @@
 
 import Foundation
 
+enum CurrencySymbols: String {
+    case usd = "$",
+         euro = "€"
+}
+
 struct Utils {
+    
+    static var currencySymbol: CurrencySymbols = CurrencySymbols.usd
     
     static let dateFormatter: RelativeDateTimeFormatter = {
         let formatter = RelativeDateTimeFormatter()
@@ -16,16 +23,23 @@ struct Utils {
         return formatter
     }()
     
-    static let numberFormatter: NumberFormatter = {
+    static func numberFormatter() -> NumberFormatter {
         let formatter = NumberFormatter()
         formatter.isLenient = true
         formatter.numberStyle = .currency
+        formatter.currencySymbol = currencySymbol.rawValue
         return formatter
-    }()
+    }
     
     static let dateStringFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MMM"
         return formatter
+    }()
+    
+    static let monthFormatter: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "LLLL"
+        return dateFormatter
     }()
 }

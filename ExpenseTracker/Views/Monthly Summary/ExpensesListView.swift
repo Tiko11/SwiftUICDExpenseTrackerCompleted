@@ -10,12 +10,6 @@ import SwiftUI
 import CoreData
 
 struct ExpensesListView: View {
-    
-    @State var logToEdit: ExpenseLog?
-    
-    @Environment(\.managedObjectContext)
-    var context: NSManagedObjectContext
-    
     @FetchRequest(
         entity: ExpenseLog.entity(),
         sortDescriptors: [
@@ -23,7 +17,6 @@ struct ExpensesListView: View {
         ]
     )
     private var result: FetchedResults<ExpenseLog>
-    private var groupedResult = [String: [ExpenseLog]]()
     
     init(predicate: NSPredicate?, sortDescriptor: NSSortDescriptor) {
         let fetchRequest = NSFetchRequest<ExpenseLog>(entityName: ExpenseLog.entity().name ?? "ExpenseLog")
@@ -33,35 +26,35 @@ struct ExpensesListView: View {
             fetchRequest.predicate = predicate
         }
         _result = FetchRequest(fetchRequest: fetchRequest)
-        
     }
     
     var body: some View {
         let listItems = convertToGroupedArray()
+        let sum = result.map { $0.amount as? Double ?? 0.0 }.reduce(0, +)
+        
+        VStack(spacing: 10) {
+            Text("Total: " + sum.formattedCurrencyText).font(.flexaMono(.bold, .large)).animation(Animation.spring())
+        }.padding(.vertical, 8)
+            .padding(.horizontal, 12)
+            .background(Color.purple.opacity(0.1))
+            .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
+            .frame(height: 44)
         List {
             if listItems.isEmpty {
-                Text("Oops, loos like there's no data...")
-                //                Image(systemName: "signature.zh")
+                Text("Oops, loos like there's no data...").font(.flexaMono(.medium,.standard)).animation(.spring())
             }
+            
             ForEach(listItems.keys.sorted(), id: \.self) { key in
                 Section {
-                    ExpansesListItemView(title: key, items: listItems[key] ?? [])
+                    ExpansesListItemView(title: key, items: listItems[key] ?? []).animation(.easeInOut)
                 }
             }
         }
     }
     
-    private func onDelete(with indexSet: IndexSet) {
-        indexSet.forEach { index in
-            let log = result[index]
-            context.delete(log)
-        }
-        try? context.saveContext()
-    }
-    
     private func convertToGroupedArray() -> [String: [ExpenseLog]] {
-        let dictionar = Dictionary(grouping: result) { $0.dateString ?? "" }
-        return dictionar
+        let dictionary = Dictionary(grouping: result) { $0.dateString ?? "" }
+        return dictionary
     }
 }
 

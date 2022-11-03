@@ -31,22 +31,19 @@ struct LogsTabView: View {
                 SelectSortOrderView(sortType: $sortType, sortOrder: $sortOrder)
                 Divider()
                 LogListView(predicate: ExpenseLog.predicate(with: Array(selectedCategories), searchText: searchText), sortDescriptor: ExpenseLogSort(sortType: sortType, sortOrder: sortOrder).sortDescriptor)
-            }
+            }.frame(height: CGFloat.infinity)
             .padding(.bottom, searchBarHeight)
             .sheet(isPresented: $isAddFormPresented) {
                 LogFormView(context: self.context)
             }
-            .navigationBarItems(trailing: Button(action: addTapped) { Text("Add") })
-            .navigationBarTitle("Expense Logs", displayMode: .inline)
+            .navigationBarItems(trailing: Button(action: addTapped) { Text("Add").font(.flexaMono()) })
+            .navigationBarTitle(Text("Expense Logs"), displayMode: .inline)
         }
     }
     
     func addTapped() {
         isAddFormPresented = true
     }
-    
-    
-    
 }
 
 struct LogsTabView_Previews: PreviewProvider {

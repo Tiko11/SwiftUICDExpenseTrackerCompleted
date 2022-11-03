@@ -22,9 +22,8 @@ struct FilterCategoriesView: View {
                         isSelected: self.selectedCategories.contains(category),
                         onTap: self.onTap
                     )
-                        
-                        .padding(.leading, category == self.categories.first ? 16 : 0)
-                        .padding(.trailing, category == self.categories.last ? 16 : 0)
+                    .padding(.leading, category == self.categories.first ? 16 : 0)
+                    .padding(.trailing, category == self.categories.last ? 16 : 0)
                     
                 }
             }
@@ -53,6 +52,7 @@ struct FilterButtonView: View {
         }) {
             HStack(spacing: 8) {
                 Text(category.rawValue.capitalized)
+                    .defaultFont()
                     .fixedSize(horizontal: true, vertical: true)
                 
                 if isSelected {
@@ -61,16 +61,13 @@ struct FilterButtonView: View {
             }
             .padding(.vertical, 8)
             .padding(.horizontal, 16)
-                
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
-                    .stroke(isSelected ? category.color : Color(UIColor.lightGray), lineWidth: 1))
+                    .stroke(isSelected ? category.color : Color(UIColor.black), lineWidth: 1))
                 .frame(height: 44)
         }
-        .foregroundColor(isSelected ? category.color : Color(UIColor.gray))
+        .foregroundColor(isSelected ? category.color : Color(UIColor.black))
     }
-    
-    
 }
 
 

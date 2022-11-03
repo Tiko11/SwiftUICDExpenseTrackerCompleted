@@ -24,7 +24,7 @@ extension ExpenseLog {
     }
     
     var amountText: String {
-        Utils.numberFormatter.string(from: NSNumber(value: amount?.doubleValue ?? 0)) ?? ""
+        Utils.numberFormatter().string(from: NSNumber(value: amount?.doubleValue ?? 0)) ?? ""
     }
     
     var notesText: String {

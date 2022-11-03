@@ -18,17 +18,18 @@ struct SelectSortOrderView: View {
     
     var body: some View {
         HStack {
-            Text("Sort by")
-            Picker(selection: $sortType, label: Text("Sort by")) {
+            Text("Sort by").defaultFont()
+            Picker(selection: $sortType,
+                   label: Text("Sort by").defaultFont()) {
                 ForEach(SortType.allCases) { type in
                     Image(systemName: type == .date ? "calendar" : "dollarsign.circle")
                         .tag(type)
                 }
-            }
-            .pickerStyle(SegmentedPickerStyle())
+            }.pickerStyle(SegmentedPickerStyle())
             
-            Text("Order by")
-            Picker(selection: $sortOrder, label: Text("Order")) {
+            Text("Order by").defaultFont()
+            Picker(selection: $sortOrder,
+                   label: Text("Order").defaultFont()) {
                 ForEach(sortOrders) { order in
                     Image(systemName: order == .ascending ? "arrow.up" : "arrow.down")
                         .tag(order)
@@ -38,7 +39,6 @@ struct SelectSortOrderView: View {
         }
         .padding(.all)
         .frame(height: 64)
-        
     }
 }
 

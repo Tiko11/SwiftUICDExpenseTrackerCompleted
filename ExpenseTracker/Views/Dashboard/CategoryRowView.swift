@@ -15,9 +15,9 @@ struct CategoryRowView: View {
     var body: some View {
         HStack {
             CategoryImageView(category: category)
-            Text(category.rawValue.capitalized)
+            Text(category.rawValue.capitalized).font(.flexaMono())
             Spacer()
-            Text(sum.formattedCurrencyText).font(.headline)
+            Text(sum.formattedCurrencyText).font(.flexaMono()).animation(.spring())
         }
     }
 }

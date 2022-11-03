@@ -31,26 +31,26 @@ struct LogFormView: View {
     var body: some View {
         NavigationView {
             Form {
-                TextField("Name", text: $name)
+                TextField("Name", text: $name).font(.flexaMono())
                     .disableAutocorrection(true)
-                TextField("Amount", value: $amount, formatter: Utils.numberFormatter)
+                TextField("Amount", value: $amount, formatter: Utils.numberFormatter()).font(.flexaMono())
                     .keyboardType(.numbersAndPunctuation)
                     
-                Picker(selection: $category, label: Text("Category")) {
+                Picker(selection: $category, label: Text("Category").defaultFont()) {
                     ForEach(Category.allCases) { category in
-                        Text(category.rawValue.capitalized).tag(category)
+                        Text(category.rawValue.capitalized).defaultFont().tag(category)
                     }
                 }
                 DatePicker(selection: $date, displayedComponents: .date) {
-                    Text("Date")
+                    Text("Date").font(.flexaMono())
                 }
-                TextField("Notes", text: $notes)
+                TextField("Notes", text: $notes).font(.flexaMono())
                     .disableAutocorrection(true)
             }
 
             .navigationBarItems(
-                leading: Button(action: self.onCancelTapped) { Text("Cancel")},
-                trailing: Button(action: self.onSaveTapped) { Text("Save")}
+                leading: Button(action: self.onCancelTapped) { Text("Cancel").font(.flexaMono()) },
+                trailing: Button(action: self.onSaveTapped) { Text("Save").font(.flexaMono()) }
             ).navigationBarTitle(title)
             
         }

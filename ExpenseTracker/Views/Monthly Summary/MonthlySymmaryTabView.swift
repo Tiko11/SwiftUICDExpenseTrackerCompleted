@@ -16,20 +16,11 @@ struct MonthlySymmaryTabView: View {
     
     var body: some View {
         VStack(spacing: 15) {
-            VStack(spacing: 5) {
-                Divider()
-                Text(" 20 000$ ").font(.largeTitle).fontWeight(.bold)
-                Text(" Feb, Mar, May")
-            }
+            Divider().background(Color.black)
+            MonthsView(selectedMonths: $selectedMonths)
             
-            VStack(spacing: 8) {
-                MonthsView(selectedMonths: $selectedMonths)
-            }
-            
-            VStack(spacing: 5) {
-                ExpensesListView(predicate: ExpenseLog.predicate(with: Array(selectedMonths), searchText: ""),
-                                 sortDescriptor: ExpenseLogSort(sortType: .date, sortOrder: .ascending).sortDescriptor)
-            }
+            ExpensesListView(predicate: ExpenseLog.predicate(with: Array(selectedMonths), searchText: ""),
+                             sortDescriptor: ExpenseLogSort(sortType: .date, sortOrder: .ascending).sortDescriptor)
         }.padding(.top)
     }
 }

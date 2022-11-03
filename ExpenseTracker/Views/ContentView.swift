@@ -9,36 +9,13 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    init() {
+        UITabBar.appearance().unselectedItemTintColor = UIColor(Color.primary)
+    }
+    
     var body: some View {
-        TabView {
-            DashboardTabView()
-                .tabItem {
-                    VStack {
-                        Text("Dashboard")
-                        Image(systemName: "chart.pie")
-                    }
-            }
-            .tag(0)
-            
-            LogsTabView()
-                .tabItem {
-                    VStack {
-                        Text("Logs")
-                        Image(systemName: "tray")
-                    }
-            }
-            .tag(1)
-            
-            MonthlySymmaryTabView()
-                .tabItem {
-                    VStack {
-                        Text("Monthly Summary")
-//                        Image(systemName: "waveform.path.ecg")
-                        Image(systemName: "chart.bar")
-                    }
-            }
-            .tag(2)
-        }
+        ExpenseTabView()
     }
 }
 

@@ -3,13 +3,10 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "ExpensesListView.body.getter:ExpensesListView.swift">
-      </ContextState>
-      <ContextState
-         contextName = "ExpensesListView.convertToGroupedArray():ExpensesListView.swift">
+         contextName = "closure #1 in DashboardTabView.fetchCurrencies():DashboardTabView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "result">
+               value = "self.totalExpenses">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -22,7 +19,32 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "Repository.call&lt;&#x3c4;_0_0&gt;(endpoint:params:httpCodes:):Request.swift">
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in closure #1 in closure #3 in ExpensesListView.body.getter:ExpensesListView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "DashboardTabView.fetchCurrencies():DashboardTabView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "isEnabled">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CurrencyRepository.convertCurrency():Request.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ExpensesListView.body.getter:ExpensesListView.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ExpensesListView.convertToGroupedArray():ExpensesListView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "result">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
    </ContextStates>
 </VariablesViewState>

@@ -42,19 +42,16 @@ struct LogListView: View {
                 }) {
                     HStack(spacing: 16) {
                         CategoryImageView(category: log.categoryEnum)
-
                         VStack(alignment: .leading, spacing: 8) {
-                            Text(log.nameText).font(.headline)
-                            Text(log.dateText).font(.subheadline)
+                            Text(log.nameText).font(.flexaMono())
+                            Text(log.dateText).font(.flexaMono(.medium, .small))
                         }
                         Spacer()
-                        Text(log.amountText).font(.headline)
+                        Text(log.amountText).font(.flexaMono())
                     }
                     .padding(.vertical, 4)
                 }
-                
             }
-               
             .onDelete(perform: onDelete)
             .sheet(item: $logToEdit, onDismiss: {
                 self.logToEdit = nil

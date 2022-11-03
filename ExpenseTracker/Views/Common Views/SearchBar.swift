@@ -70,6 +70,7 @@ struct SearchBar: UIViewRepresentable {
         searchBar.placeholder = placeholder
         searchBar.delegate = context.coordinator
         searchBar.enablesReturnKeyAutomatically = false
+        searchBar.searchTextField.font = UIFont.flexa(size: 14)
         return searchBar
     }
     
